@@ -293,7 +293,7 @@ public class SingleLinkedList {
 
     public void nthNodeFromTail(int index) {
         checkEmpty();
-        int indexFromLast = size() - index;
+        int indexFromLast = size() - (index + 1);
         int tempIndex = 0;
         Node curr = head;
         while (curr != null) {
@@ -306,5 +306,7 @@ public class SingleLinkedList {
         }
         System.out.println("Index out of Bound");
     }
+
+
 
 }

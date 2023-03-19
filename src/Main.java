@@ -21,13 +21,13 @@ public class Main {
         singleLinkedList.display();
 
         copy = singleLinkedList.copy();
-//        copy.deleteList();
+        copy.removeDuplicates();
         copy.display();
 //        copy.insertHead(2);
 
         copy.size();
 
-        copy.nthNodeFromBeginning(12);
+        copy.nthNodeFromTail(5);
 
     }
 }
