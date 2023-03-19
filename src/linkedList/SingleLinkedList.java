@@ -25,15 +25,15 @@ public class SingleLinkedList {
 
     public void insertTail(int value) {
         Node newNode = new Node(value);
-        Node temp = head;
+        Node curr = head;
         if (head == null) {
             head = newNode;
             return;
         }
-        while (temp.next != null) {
-            temp = temp.next;
+        while (curr.next != null) {
+            curr = curr.next;
         }
-        temp.next = newNode;
+        curr.next = newNode;
         size++;
     }
 
@@ -41,8 +41,8 @@ public class SingleLinkedList {
         if (head == null) {
             throw new RuntimeException("Empty list");
         }
-        Node temp = head;
-        head = temp.next;
+        Node curr = head;
+        head = curr.next;
     }
 
     public void deleteNodes(int value) {
@@ -54,12 +54,12 @@ public class SingleLinkedList {
         }
 
 
-        Node temp = head;
-        while (temp != null) {
-            if (temp.next != null && temp.next.value == value) {
-                temp.next = temp.next.next;
+        Node curr = head;
+        while (curr != null) {
+            if (curr.next != null && curr.next.value == value) {
+                curr.next = curr.next.next;
             } else {
-                temp = temp.next;
+                curr = curr.next;
             }
         }
     }
@@ -77,42 +77,42 @@ public class SingleLinkedList {
         }
 
 
-        Node temp = head;
-        while (temp != null) {
-            if (temp.next != null && temp.next.value == value) {
-                temp.next = temp.next.next;
+        Node curr = head;
+        while (curr != null) {
+            if (curr.next != null && curr.next.value == value) {
+                curr.next = curr.next.next;
                 return;
             } else {
-                temp = temp.next;
+                curr = curr.next;
             }
         }
     }
 
     public void search(int value) {
-        Node temp = head;
-        while (temp != null) {
-            if (temp.value == value) {
+        Node curr = head;
+        while (curr != null) {
+            if (curr.value == value) {
                 System.out.println(value + "->Element Found");
                 return;
             }
-            temp = temp.next;
+            curr = curr.next;
         }
         System.out.println(value + "->Element not Found");
     }
 
     public void sortedInsert(int value) {
         Node newNode = new Node(value);
-        Node temp = head;
+        Node curr = head;
         if (head == null || head.value > value) {
             newNode.next = head;
             head = newNode;
             return;
         }
-        while (temp.next != null && temp.next.value < value) {
-            temp = temp.next;
+        while (curr.next != null && curr.next.value < value) {
+            curr = curr.next;
         }
-        newNode.next = temp.next;
-        temp.next = newNode;
+        newNode.next = curr.next;
+        curr.next = newNode;
     }
 
     public void display() {
@@ -120,12 +120,52 @@ public class SingleLinkedList {
             throw new RuntimeException("Empty list");
         }
 
-        Node temp = head;
-        while (temp != null) {
-            System.out.print(temp.value + "->");
-            temp = temp.next;
+        Node curr = head;
+        while (curr != null) {
+            System.out.print(curr.value + "->");
+            curr = curr.next;
         }
         System.out.println("END");
+    }
+
+    public void reverseRecursive() {
+        head = reverseRecursiveUtils(head, null);
+    }
+
+    public Node reverseRecursiveUtils(Node currentNode, Node nextNode) {
+        Node temp;
+        if (currentNode == null) {
+            return null;
+        }
+        if (currentNode.next == null) {
+            currentNode.next = nextNode;
+            return currentNode;
+        }
+        temp = reverseRecursiveUtils(currentNode.next, currentNode);
+        currentNode.next = nextNode;
+        return temp;
+    }
+
+
+    public void reverseList() {
+        if (head == null) {
+            throw new RuntimeException("Empty list");
+        }
+        if (head.next == null) {
+            return;
+        }
+
+        Node curr = head;
+        Node prev = null;
+        Node next = null;
+
+        while (curr != null) {
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        head = prev;
     }
 
 

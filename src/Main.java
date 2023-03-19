@@ -15,13 +15,10 @@ public class Main {
         singleLinkedList.insertTail(6);
         singleLinkedList.insertTail(5);
         singleLinkedList.sortedInsert(12);
-//        singleLinkedList.removeHead();
-        singleLinkedList.deleteFirstNodes(5);
-        singleLinkedList.deleteList();
         singleLinkedList.display();
 
-        singleLinkedList.search(1);
-
+        singleLinkedList.reverseRecursive();
+        singleLinkedList.display();
 
     }
 }
