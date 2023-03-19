@@ -1,7 +1,6 @@
 package linkedList;
 
 public class SingleLinkedList {
-    private int size = 0;
     private Node head;
 
     private static class Node {
@@ -20,7 +19,6 @@ public class SingleLinkedList {
 
     public void insertHead(int value) {
         head = new Node(value, head);
-        size++;
     }
 
     public void insertTail(int value) {
@@ -34,21 +32,16 @@ public class SingleLinkedList {
             curr = curr.next;
         }
         curr.next = newNode;
-        size++;
     }
 
     public void removeHead() {
-        if (head == null) {
-            throw new RuntimeException("Empty list");
-        }
+        checkEmpty();
         Node curr = head;
         head = curr.next;
     }
 
     public void deleteNodes(int value) {
-        if (head == null) {
-            throw new RuntimeException("Empty list");
-        }
+        checkEmpty();
         if (head.value == value) {
             head = head.next;
         }
@@ -69,14 +62,10 @@ public class SingleLinkedList {
     }
 
     public void deleteFirstNodes(int value) {
-        if (head == null) {
-            throw new RuntimeException("Empty list");
-        }
+        checkEmpty();
         if (head.value == value) {
             head = head.next;
         }
-
-
         Node curr = head;
         while (curr != null) {
             if (curr.next != null && curr.next.value == value) {
@@ -116,9 +105,7 @@ public class SingleLinkedList {
     }
 
     public void display() {
-        if (head == null) {
-            throw new RuntimeException("Empty list");
-        }
+        checkEmpty();
 
         Node curr = head;
         while (curr != null) {
@@ -128,8 +115,48 @@ public class SingleLinkedList {
         System.out.println("END");
     }
 
+    private void checkEmpty() {
+        if (head == null) {
+            throw new RuntimeException("Empty list");
+        }
+    }
+
     public void reverseRecursive() {
         head = reverseRecursiveUtils(head, null);
+    }
+
+    public void removeDuplicates() {
+        checkEmpty();
+        Node curr = head;
+        Node temp = null;
+        while (curr != null && curr.next != null) {
+            temp = curr;
+            while (temp.next != null) {
+                if (curr.value == temp.next.value) {
+                    temp.next = temp.next.next;
+                } else {
+                    temp = temp.next;
+                }
+            }
+            curr = curr.next;
+        }
+    }
+
+    public void removeDuplicates(int value) {
+        checkEmpty();
+        Node curr = head;
+        Node temp = null;
+        while (curr != null && curr.next != null) {
+            temp = curr;
+            while (temp.next != null) {
+                if (temp.next.value == value) {
+                    temp.next = temp.next.next;
+                } else {
+                    temp = temp.next;
+                }
+            }
+            curr = curr.next;
+        }
     }
 
     public Node reverseRecursiveUtils(Node currentNode, Node nextNode) {
@@ -146,11 +173,35 @@ public class SingleLinkedList {
         return temp;
     }
 
+    public SingleLinkedList reverseCopy() {
+        checkEmpty();
+        SingleLinkedList list = new SingleLinkedList();
+        Node curr = head;
+        while (curr != null) {
+            list.head = new Node(curr.value, list.head);
+            curr = curr.next;
+        }
+        return list;
+    }
+
+    public SingleLinkedList copy() {
+        checkEmpty();
+        Node curr = head;
+
+        SingleLinkedList list = new SingleLinkedList();
+        list.head = new Node(head.value);
+        Node newListCurr = list.head;
+
+        while (curr.next != null) {
+            newListCurr.next = new Node(curr.next.value);
+            newListCurr = newListCurr.next;
+            curr = curr.next;
+        }
+        return list;
+    }
 
     public void reverseList() {
-        if (head == null) {
-            throw new RuntimeException("Empty list");
-        }
+        checkEmpty();
         if (head.next == null) {
             return;
         }
@@ -168,5 +219,92 @@ public class SingleLinkedList {
         head = prev;
     }
 
+
+    public boolean compareLists(SingleLinkedList list1, SingleLinkedList list2) {
+        boolean result = compareLists(list1.head.next, list2.head.next);
+        System.out.println(result);
+        return result;
+    }
+
+    public boolean iterativeCompareLists(SingleLinkedList list1, SingleLinkedList list2) {
+        boolean result = false;
+        Node curr1 = list1.head;
+        Node curr2 = list2.head;
+
+
+        while (curr1 != null && curr2 != null) {
+
+            if (curr1.value != curr2.value) {
+                result = false;
+                System.out.println(result);
+
+                return result;
+            }
+
+            curr1 = curr1.next;
+            curr2 = curr2.next;
+        }
+        if (curr1 == null && curr2 == null) {
+            result = true;
+            System.out.println(result);
+
+            return result;
+        }
+
+        System.out.println(result);
+        return result;
+    }
+
+    public boolean compareLists(Node head1, Node head2) {
+        if (head1 == null && head2 == null) {
+            return true;
+        } else if (head1 == null || head2 == null || (head1.value != head2.value)) {
+            return false;
+        } else {
+            return compareLists(head1.next, head2.next);
+        }
+    }
+
+
+    public int size() {
+        int size = 0;
+        Node curr = head;
+        while (curr != null) {
+            size++;
+            curr = curr.next;
+        }
+        System.out.println("size->" + size);
+        return size;
+    }
+
+    public void nthNodeFromBeginning(int index) {
+        int tempIndex = 0;
+        Node curr = head;
+        while (curr != null) {
+            if (index == tempIndex) {
+                System.out.println(curr.value);
+                return;
+            }
+            tempIndex++;
+            curr = curr.next;
+        }
+        System.out.println("Index out of Bound");
+    }
+
+    public void nthNodeFromTail(int index) {
+        checkEmpty();
+        int indexFromLast = size() - index;
+        int tempIndex = 0;
+        Node curr = head;
+        while (curr != null) {
+            if (indexFromLast == tempIndex) {
+                System.out.println(curr.value);
+                return;
+            }
+            tempIndex++;
+            curr = curr.next;
+        }
+        System.out.println("Index out of Bound");
+    }
 
 }
