@@ -4,30 +4,17 @@ public class Main {
     public static void main(String[] args) {
 
         SingleLinkedList singleLinkedList = new SingleLinkedList();
-        SingleLinkedList copy = new SingleLinkedList();
-        singleLinkedList.insertHead(10);
-        singleLinkedList.insertHead(2);
-        singleLinkedList.insertHead(5);
-        singleLinkedList.insertHead(5);
-
-        singleLinkedList.sortedInsert(5);
-        singleLinkedList.sortedInsert(2);
-        singleLinkedList.sortedInsert(1);
-        singleLinkedList.sortedInsert(5);
-        singleLinkedList.sortedInsert(5);
-        singleLinkedList.insertTail(6);
-        singleLinkedList.insertTail(5);
-        singleLinkedList.sortedInsert(452);
+        singleLinkedList.insertTail(0);
+        singleLinkedList.insertTail(1);
+        singleLinkedList.insertTail(2);
+//        singleLinkedList.insertTail(4);
+//        singleLinkedList.insertTail(5);
         singleLinkedList.display();
+        singleLinkedList.reverseTillK(4);
 
-        copy = singleLinkedList.copy();
-        copy.removeDuplicates();
-        copy.display();
-//        copy.insertHead(2);
-
-        copy.size();
-
-        copy.nthNodeFromTail(5);
-
+//        singleLinkedList.findMid();
+//        singleLinkedList.reorderList();
+//        System.out.println("Final Result");
+        singleLinkedList.display();
     }
 }

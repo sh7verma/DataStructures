@@ -1,29 +1,31 @@
 package linkedList;
 
+import org.w3c.dom.NodeList;
+
 public class SingleLinkedList {
-    private Node head;
+    private ListNode head;
 
-    private static class Node {
+    private static class ListNode {
         private int value;
-        private Node next;
+        private ListNode next;
 
-        public Node(int value, Node next) {
+        public ListNode(int value, ListNode next) {
             this.value = value;
             this.next = next;
         }
 
-        public Node(int value) {
+        public ListNode(int value) {
             this.value = value;
         }
     }
 
     public void insertHead(int value) {
-        head = new Node(value, head);
+        head = new ListNode(value, head);
     }
 
     public void insertTail(int value) {
-        Node newNode = new Node(value);
-        Node curr = head;
+        ListNode newNode = new ListNode(value);
+        ListNode curr = head;
         if (head == null) {
             head = newNode;
             return;
@@ -36,7 +38,7 @@ public class SingleLinkedList {
 
     public void removeHead() {
         checkEmpty();
-        Node curr = head;
+        ListNode curr = head;
         head = curr.next;
     }
 
@@ -47,7 +49,7 @@ public class SingleLinkedList {
         }
 
 
-        Node curr = head;
+        ListNode curr = head;
         while (curr != null) {
             if (curr.next != null && curr.next.value == value) {
                 curr.next = curr.next.next;
@@ -66,7 +68,7 @@ public class SingleLinkedList {
         if (head.value == value) {
             head = head.next;
         }
-        Node curr = head;
+        ListNode curr = head;
         while (curr != null) {
             if (curr.next != null && curr.next.value == value) {
                 curr.next = curr.next.next;
@@ -78,7 +80,7 @@ public class SingleLinkedList {
     }
 
     public void search(int value) {
-        Node curr = head;
+        ListNode curr = head;
         while (curr != null) {
             if (curr.value == value) {
                 System.out.println(value + "->Element Found");
@@ -90,8 +92,8 @@ public class SingleLinkedList {
     }
 
     public void sortedInsert(int value) {
-        Node newNode = new Node(value);
-        Node curr = head;
+        ListNode newNode = new ListNode(value);
+        ListNode curr = head;
         if (head == null || head.value > value) {
             newNode.next = head;
             head = newNode;
@@ -107,7 +109,7 @@ public class SingleLinkedList {
     public void display() {
         checkEmpty();
 
-        Node curr = head;
+        ListNode curr = head;
         while (curr != null) {
             System.out.print(curr.value + "->");
             curr = curr.next;
@@ -127,8 +129,8 @@ public class SingleLinkedList {
 
     public void removeDuplicates() {
         checkEmpty();
-        Node curr = head;
-        Node temp = null;
+        ListNode curr = head;
+        ListNode temp = null;
         while (curr != null && curr.next != null) {
             temp = curr;
             while (temp.next != null) {
@@ -144,8 +146,8 @@ public class SingleLinkedList {
 
     public void removeDuplicates(int value) {
         checkEmpty();
-        Node curr = head;
-        Node temp = null;
+        ListNode curr = head;
+        ListNode temp = null;
         while (curr != null && curr.next != null) {
             temp = curr;
             while (temp.next != null) {
@@ -159,8 +161,8 @@ public class SingleLinkedList {
         }
     }
 
-    public Node reverseRecursiveUtils(Node currentNode, Node nextNode) {
-        Node temp;
+    public ListNode reverseRecursiveUtils(ListNode currentNode, ListNode nextNode) {
+        ListNode temp;
         if (currentNode == null) {
             return null;
         }
@@ -176,9 +178,9 @@ public class SingleLinkedList {
     public SingleLinkedList reverseCopy() {
         checkEmpty();
         SingleLinkedList list = new SingleLinkedList();
-        Node curr = head;
+        ListNode curr = head;
         while (curr != null) {
-            list.head = new Node(curr.value, list.head);
+            list.head = new ListNode(curr.value, list.head);
             curr = curr.next;
         }
         return list;
@@ -186,14 +188,14 @@ public class SingleLinkedList {
 
     public SingleLinkedList copy() {
         checkEmpty();
-        Node curr = head;
+        ListNode curr = head;
 
         SingleLinkedList list = new SingleLinkedList();
-        list.head = new Node(head.value);
-        Node newListCurr = list.head;
+        list.head = new ListNode(head.value);
+        ListNode newListCurr = list.head;
 
         while (curr.next != null) {
-            newListCurr.next = new Node(curr.next.value);
+            newListCurr.next = new ListNode(curr.next.value);
             newListCurr = newListCurr.next;
             curr = curr.next;
         }
@@ -205,11 +207,9 @@ public class SingleLinkedList {
         if (head.next == null) {
             return;
         }
-
-        Node curr = head;
-        Node prev = null;
-        Node next = null;
-
+        ListNode curr = head;
+        ListNode prev = null;
+        ListNode next = null;
         while (curr != null) {
             next = curr.next;
             curr.next = prev;
@@ -228,8 +228,8 @@ public class SingleLinkedList {
 
     public boolean iterativeCompareLists(SingleLinkedList list1, SingleLinkedList list2) {
         boolean result = false;
-        Node curr1 = list1.head;
-        Node curr2 = list2.head;
+        ListNode curr1 = list1.head;
+        ListNode curr2 = list2.head;
 
 
         while (curr1 != null && curr2 != null) {
@@ -255,7 +255,7 @@ public class SingleLinkedList {
         return result;
     }
 
-    public boolean compareLists(Node head1, Node head2) {
+    public boolean compareLists(ListNode head1, ListNode head2) {
         if (head1 == null && head2 == null) {
             return true;
         } else if (head1 == null || head2 == null || (head1.value != head2.value)) {
@@ -268,7 +268,7 @@ public class SingleLinkedList {
 
     public int size() {
         int size = 0;
-        Node curr = head;
+        ListNode curr = head;
         while (curr != null) {
             size++;
             curr = curr.next;
@@ -279,7 +279,7 @@ public class SingleLinkedList {
 
     public void nthNodeFromBeginning(int index) {
         int tempIndex = 0;
-        Node curr = head;
+        ListNode curr = head;
         while (curr != null) {
             if (index == tempIndex) {
                 System.out.println(curr.value);
@@ -295,7 +295,7 @@ public class SingleLinkedList {
         checkEmpty();
         int indexFromLast = size() - (index + 1);
         int tempIndex = 0;
-        Node curr = head;
+        ListNode curr = head;
         while (curr != null) {
             if (indexFromLast == tempIndex) {
                 System.out.println(curr.value);
@@ -307,6 +307,205 @@ public class SingleLinkedList {
         System.out.println("Index out of Bound");
     }
 
+    public boolean hasCycle() {
+        if (head == null) {
+            return false;
+        }
+        ListNode fast = head;
+        ListNode slow = head;
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int hasCircularCycle() {
+        checkEmpty();
+        ListNode fast = head;
+        ListNode slow = head;
+        while (fast.next != null && fast.next.next != null) {
+            if (head == fast.next || head == fast.next.next) {
+                System.out.println("Circular List");
+            }
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) {
+                System.out.println("List has circle");
+                return 1;
+            }
+        }
+        System.out.println("No circles found");
+        return 0;
+    }
+
+
+    public ListNode loopPointDetectNode() {
+        checkEmpty();
+        ListNode fast = head;
+        ListNode slow = head;
+        ListNode curr = head;
+        ListNode temp = null;
+
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) {
+                temp = fast;
+                break;
+            }
+        }
+        while (curr.next != null && temp != null) {
+            if (curr == temp) {
+                return curr;
+            }
+            curr = curr.next;
+            temp = temp.next;
+        }
+        System.out.println("No circles found");
+        return null;
+    }
+
+    public ListNode removeloopPointDetectNode() {
+        checkEmpty();
+        ListNode fast = head;
+        ListNode slow = head;
+        ListNode curr = head;
+        ListNode temp = null;
+
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) {
+                temp = fast;
+                break;
+            }
+        }
+        while (curr.next != null && temp != null) {
+            if (curr.next == temp.next) {
+                temp.next = null;
+                break;
+            }
+            curr = curr.next;
+            temp = temp.next;
+        }
+        System.out.println("No circles found");
+        return null;
+    }
+
+    public void findMid() {
+        checkEmpty();
+        ListNode slow = head;
+        if (head.next == null) {
+            System.out.println(slow.value);
+            return;
+        }
+        ListNode fast = head.next;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        System.out.println(slow.value);
+    }
+
+
+    //1-2-3-4-5 k=2
+//    5-4-1-2-3
+//    0-1-2
+
+    public void reverseTillK(int k) {
+        if (head == null || k == 0)
+            return;
+
+        ListNode curr = head;
+
+        int size = 0;
+
+        while (curr != null) {
+            size++;
+            if (curr.next == null) {
+                curr.next = head;
+                break;
+            }
+            curr = curr.next;
+        }
+
+        k = k % size;
+        int length = size - k;
+
+        curr = head;
+        int pointer = 0;
+        ListNode tempHead = null;
+        while (curr != null) {
+            pointer++;
+            if (pointer == length) {
+                tempHead = curr.next;
+                curr.next = null;
+                break;
+            }
+            curr = curr.next;
+        }
+
+        head = tempHead;
+    }
+
+
+//    L0 → L1 → … → Ln - 1 → Ln
+//    L0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 → …
+
+    public void reorderList() {
+        if (head == null || head.next == null)
+            return;
+
+        // step 1. cut the list to two halves
+        // prev will be the tail of 1st half
+        // slow will be the head of 2nd half
+        ListNode prev = null, slow = head, fast = head, l1 = head;
+
+        while (fast != null && fast.next != null) {
+            prev = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        prev.next = null;
+
+        // step 2. reverse the 2nd half
+        ListNode l2 = reverse(slow);
+
+        // step 3. merge the two halves
+        merge(l1, l2);
+    }
+
+    ListNode reverse(ListNode head) {
+        ListNode prev = null, curr = head, next = null;
+
+        while (curr != null) {
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+
+        return prev;
+    }
+
+    void merge(ListNode l1, ListNode l2) {
+        while (l1 != null) {
+            ListNode n1 = l1.next, n2 = l2.next;
+            l1.next = l2;
+
+            if (n1 == null)
+                break;
+
+            l2.next = n1;
+            l1 = n1;
+            l2 = n2;
+        }
+    }
 
 
 }
