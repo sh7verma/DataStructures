@@ -1,20 +1,17 @@
 import linkedList.SingleLinkedList;
+import stacks.StacksArray;
+import stacks.StacksLL;
 
 public class Main {
     public static void main(String[] args) {
 
-        SingleLinkedList singleLinkedList = new SingleLinkedList();
-        singleLinkedList.insertTail(0);
-        singleLinkedList.insertTail(1);
-        singleLinkedList.insertTail(2);
-//        singleLinkedList.insertTail(4);
-//        singleLinkedList.insertTail(5);
-        singleLinkedList.display();
-        singleLinkedList.reverseTillK(4);
+        StacksLL stack = new StacksLL();
 
-//        singleLinkedList.findMid();
-//        singleLinkedList.reorderList();
-//        System.out.println("Final Result");
-        singleLinkedList.display();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+        stack.sortedInsert(3);
+        stack.print();
     }
 }
