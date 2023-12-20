@@ -1,7 +1,5 @@
 package linkedList;
 
-import org.w3c.dom.NodeList;
-
 public class SingleLinkedList {
     private ListNode head;
 
