@@ -25,7 +25,7 @@ class SortingAlgo {
         var temp: Int
         var swaps = 1
         var i = 0
-        while (i < size - 1 &&S swaps == 1) {
+        while (i < size - 1 && swaps == 1) {
             for (j in 0 until size - i - 1) {
                 swaps = 0
                 if (array[j] > array[j + 1]) {
