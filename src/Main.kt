@@ -1,16 +1,30 @@
-import algorithms.sorting.SortingAlgo
+import org.intellij.lang.annotations.Flow
+import java.lang.Error
 
 object Main {
     @JvmStatic
     fun main(args: Array<String>) {
-        val algo = SortingAlgo()
 
-        val array= arrayOf(1, 3, 4, 5, 8 ,7, 9)
-        algo.mergeSorting(array)
-
-        for(data in array){
-            println(data)
-        }
 
     }
 }
+
+    fun isPalindrome(
+        s: String
+    ): Boolean {
+        var left = 0
+        var rignt = s.lastIndex
+        while (left <= rignt) {
+            if (s[left] == s[rignt]) {
+                left++
+                rignt--
+            } else {
+                return false
+            }
+        }
+        return true
+    }
+
+
+
+

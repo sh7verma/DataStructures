@@ -1,5 +1,7 @@
 package algorithms.sorting
 
+import algorithms.validateEmpty
+
 class SortingAlgo {
     //    WCP= O(n^2)
     //    ACP= O(n^2)
@@ -26,8 +28,8 @@ class SortingAlgo {
         var swaps = 1
         var i = 0
         while (i < size - 1 && swaps == 1) {
+            swaps = 0
             for (j in 0 until size - i - 1) {
-                swaps = 0
                 if (array[j] > array[j + 1]) {
                     temp = array[j]
                     array[j] = array[j + 1]
@@ -43,6 +45,38 @@ class SortingAlgo {
         return value1 > value2
     }
 
+    //    [5,2,6,1]
+//    [2,1,1,0]
+    fun countSmaller(nums: IntArray): List<Int> {
+        val returnList = arrayListOf<Int>()
+        for (i in nums.indices) {
+            returnList.add(insertionSubSort(nums, i + 1, nums[i]))
+        }
+        return returnList
+    }
+
+    fun insertionSubSort(array: IntArray, start: Int, target: Int): Int {
+        var result = 0
+        val size = array.size
+        var temp: Int
+        var j: Int
+        for (i in start + 1 until size) {
+            temp = array[i]
+            j = i - 1
+            while (j >= start && array[j] > temp) {
+                array[j + 1] = array[j]
+                j--
+            }
+            array[j + 1] = temp
+        }
+
+        for (i in start until size) {
+            if (array[i] < target) {
+                result++
+            }
+        }
+        return result
+    }
 
     //    WCP= O(n^2)
     //    ACP= O(n^2)
@@ -51,16 +85,16 @@ class SortingAlgo {
     fun insertionSort(array: Array<Int>) {
         if (validateEmpty(array)) return
         val size = array.size
-        var temp: Int
+        var key: Int
         var j: Int
         for (i in 1 until size) {
-            temp = array[i]
+            key = array[i]
             j = i - 1
-            while (j >= 0 && array[j] > temp) {
+            while (j >= 0 && array[j] > key) {
                 array[j + 1] = array[j]
                 j--
             }
-            array[j + 1] = temp
+            array[j + 1] = key
         }
     }
 
@@ -87,6 +121,25 @@ class SortingAlgo {
 
     }
 
+    fun maximumGap(nums: IntArray): Int {
+        val size = nums.size
+        if (size == 1) {
+            return 0
+        }
+        mergeSorting(nums.toTypedArray())
+
+        for (data in nums) {
+            println(data)
+        }
+
+        var maxDiff = 0
+        for (i in 0 until size - 1) {
+            if (maxDiff > (nums[i] - nums[i + 1])) {
+                maxDiff = nums[i] - nums[i + 1]
+            }
+        }
+        return Math.abs(maxDiff)
+    }
 
     //    WCP= O(nlogn)
     //    ACP= O(nlogn)
@@ -139,7 +192,7 @@ class SortingAlgo {
             }
         }
         for (y in low until high) {
-            this[y]=resultArray[y]
+            this[y] = resultArray[y]
         }
     }
 
@@ -180,10 +233,6 @@ class SortingAlgo {
     }
 
     companion object {
-        private fun validateEmpty(array: Array<Int>?): Boolean {
-            return array.isNullOrEmpty()
-        }
-
         fun Array<Int>.swap(first: Int, last: Int) {
             val temp = this[first]
             this[first] = this[last]

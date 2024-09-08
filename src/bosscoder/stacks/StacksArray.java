@@ -1,9 +1,9 @@
-package stacks;
+package bosscoder.stacks;
 
 public class StacksArray {
 
     private int[] data;
-    private int capacity=1000;
+    private int capacity = 1000;
     private int top = -1;
 
     public StacksArray() {
@@ -55,7 +55,7 @@ public class StacksArray {
         }
     }
 
-    public int top(){
+    public int top() {
         checkEmpty();
         return data[top];
     }

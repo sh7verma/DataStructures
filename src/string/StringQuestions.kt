@@ -1,6 +1,40 @@
 package string
 
+import jdk.nashorn.internal.runtime.arrays.TypedArrayData
+
 class StringQuestions {
+    fun reverseWords(s: String): String {
+        val wordArray = s.split(" ").toTypedArray()
+        for (i in wordArray.indices) {
+            wordArray[i] = reverseOnlyWords(wordArray[i])
+        }
+        var first = 0
+        var last = wordArray.size - 1
+        while (first < last) {
+            wordArray.swap2(first,last)
+            first++
+            last--
+        }
+        return wordArray.joinToString(" ")
+    }
+    fun reverseNumber(number: Int): Int {
+        var num = number
+        var reversed = 0
+
+        while (num != 0) {
+            val digit = num % 10
+            reversed = reversed * 10 + digit
+            num /= 10
+            println(num)
+        }
+
+        return reversed
+    }
+    fun Array<String>.swap2(first: Int, last: Int) {
+        val temp = this[first]
+        this[first] = this[last]
+        this[last] = temp
+    }
 
     fun reverseString(s: String?): String {
         if (s.isNullOrEmpty()) {
@@ -157,7 +191,8 @@ class StringQuestions {
     }
 
 }
- fun CharArray.swap(first: Int, last: Int) {
+
+fun CharArray.swap(first: Int, last: Int) {
     val temp = this[first]
     this[first] = this[last]
     this[last] = temp
